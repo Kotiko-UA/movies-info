@@ -1,11 +1,18 @@
 import { getMovieById } from 'components/Api';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   const movieImg = movie?.poster_path
@@ -31,7 +38,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={'/'}>Go back</Link>
+      <Link to={location?.state?.from ?? '/'}>Go back</Link>
       {movie && (
         <div>
           <img width={300} height={450} src={movieImg} alt="poster" />
