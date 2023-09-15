@@ -13,3 +13,15 @@ export const getMovieById = async id => {
   const resp = await axios.get(`movie/${id}`);
   return resp.data;
 };
+export const getMovieCredits = async id => {
+  const resp = await axios.get(`movie/${id}/credits`);
+  return resp.data;
+};
+export const getMovieReviews = async id => {
+  const resp = await axios.get(`movie/${id}/reviews`);
+  return resp.data;
+};
+export const getMovieByName = async name => {
+  const resp = await axios.get(`search/movie?query=${name}`);
+  return resp.data;
+};
