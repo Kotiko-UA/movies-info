@@ -24,7 +24,6 @@ const MovieDetails = () => {
     try {
       async function getSomMovie() {
         const movieData = await getMovieById(movieId);
-        console.log(movieData);
         setMovie(movieData);
       }
 
