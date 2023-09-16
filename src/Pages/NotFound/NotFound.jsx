@@ -5,7 +5,7 @@ const NotFound = () => {
   return (
     <>
       <StyledLink to={'/'}>Go Back</StyledLink>
-      <NotFImg>{/* <Img src="../../img/404-status-code.png" /> */}</NotFImg>
+      <NotFImg></NotFImg>
     </>
   );
 };
