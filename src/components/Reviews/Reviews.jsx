@@ -2,15 +2,20 @@ import { getMovieReviews } from 'components/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [hasReview, setHasReview] = useState(true);
 
   useEffect(() => {
     async function getReviews() {
       try {
         if (!movieId) return;
         const revData = await getMovieReviews(movieId);
+        if (revData.results.length === 0) {
+          setHasReview(false);
+          return;
+        }
         setReviews(revData.results);
       } catch (error) {
         console.log(error);
@@ -20,6 +25,7 @@ export const Reviews = () => {
   }, [movieId]);
   return (
     <div>
+      {!hasReview && <div>movie don`t have any reviews</div>}
       <ul>
         {reviews.length > 0 &&
           reviews.map(author => (
@@ -32,3 +38,4 @@ export const Reviews = () => {
     </div>
   );
 };
+export default Reviews;

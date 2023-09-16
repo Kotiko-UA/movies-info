@@ -1,6 +1,5 @@
 import { getMovieById } from 'components/Api';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { Suspense, useEffect, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -12,6 +11,7 @@ import {
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [hasMovie, setHasMovie] = useState(true);
   const location = useLocation();
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
@@ -21,18 +21,17 @@ const MovieDetails = () => {
 
   useEffect(() => {
     if (!movieId) return;
-    try {
-      async function getSomMovie() {
+
+    async function getSomMovie() {
+      try {
         const movieData = await getMovieById(movieId);
         setMovie(movieData);
-      }
-
-      getSomMovie();
-    } catch (error) {
-      if (error.code !== 'ERR_CANCELED') {
-        toast.error('Wow! Something went wrong!');
+      } catch (error) {
+        setHasMovie(false);
       }
     }
+
+    getSomMovie();
   }, [movieId]);
 
   return (
@@ -61,9 +60,10 @@ const MovieDetails = () => {
           </li>
         </ul>
       )}
-      {!movie && <div>Wow, something happened, try another movie!</div>}
-
-      <Outlet />
+      {!hasMovie && <div>Wow, something happened, try another movie!</div>}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

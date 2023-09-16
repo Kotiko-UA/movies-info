@@ -1,17 +1,34 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Li, StyledMovesLink, Ul } from 'Pages/Home/Home.styled';
+import { useLocation } from 'react-router-dom';
 export const FilmList = ({ movies }) => {
   const location = useLocation();
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
   return (
-    <ul>
+    <Ul>
       {movies.map(movie => {
         return (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+          <Li key={movie.id}>
+            <StyledMovesLink
+              to={`/movies/${movie.id}`}
+              state={{ from: location }}
+            >
+              <img
+                width={300}
+                height={450}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : defaultImg
+                }
+                alt="poster"
+              />
               {movie.title || movie.name}
-            </Link>
-          </li>
+            </StyledMovesLink>
+          </Li>
         );
       })}
-    </ul>
+    </Ul>
   );
 };

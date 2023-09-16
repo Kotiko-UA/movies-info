@@ -1,6 +1,7 @@
 import { getMovieByName } from 'components/Api';
 import { FilmList } from 'components/FilmList/FilmList';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
@@ -14,6 +15,10 @@ const Movies = () => {
     async function getSearch() {
       try {
         const searcMovies = await getMovieByName(movies);
+        if (searcMovies.results.length === 0) {
+          toast.error('we don`t found any movies');
+          return;
+        }
         setMoviesList(searcMovies.results);
       } catch (error) {
         console.log(error);
@@ -25,7 +30,8 @@ const Movies = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if (e.target.elements.search.value === '') alert('type some text');
+    if (e.target.elements.search.value === '')
+      toast.error('need to type something to search!');
 
     setSearchParams({ query: e.target.elements.search.value });
   };
@@ -34,7 +40,6 @@ const Movies = () => {
   };
   return (
     <>
-      <div>Movies</div>
       <form onSubmit={onSubmit}>
         <input
           onChange={onInput}
