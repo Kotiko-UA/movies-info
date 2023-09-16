@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Header = styled.header`
@@ -10,7 +10,7 @@ export const Header = styled.header`
   border-left: 0;
   border-right: 0;
 `;
-export const Filmotela = styled.div`
+export const Filmotela = styled(Link)`
   font-size: 24px;
   font-weight: 700;
   color: blue;

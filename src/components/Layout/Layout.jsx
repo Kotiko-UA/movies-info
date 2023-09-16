@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Header>
-        <Filmotela>Filmotela</Filmotela>
+        <Filmotela to={'/'}>Filmotela</Filmotela>
         <nav>
           <Ul>
             <li>

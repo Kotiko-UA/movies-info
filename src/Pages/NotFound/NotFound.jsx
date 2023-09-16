@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { Img, NotFImg, StyledLink } from './NotFound.styled';
 
 const NotFound = () => {
   return (
     <>
-      <div>NotFound</div>
-      <Link to={'/'}>Go Back</Link>
+      <StyledLink to={'/'}>Go Back</StyledLink>
+      <NotFImg>{/* <Img src="../../img/404-status-code.png" /> */}</NotFImg>
     </>
   );
 };
