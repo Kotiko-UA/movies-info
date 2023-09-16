@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { Img, NotFImg, StyledLink } from './NotFound.styled';
+import { NotFImg, StyledLink } from './NotFound.styled';
 
 const NotFound = () => {
   return (
