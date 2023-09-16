@@ -26,10 +26,8 @@ export const Rating = styled.span`
   margin-bottom: 14px;
   padding: 20px;
   display: block;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
-  border: 2px solid orange;
-  border-radius: 50%;
   color: orange;
 `;
 export const H2 = styled.h2`
