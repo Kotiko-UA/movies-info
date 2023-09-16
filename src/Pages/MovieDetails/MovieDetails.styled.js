@@ -21,16 +21,21 @@ export const H1 = styled.h1`
   color: blue;
   margin-bottom: 14px;
 `;
+export const RatingP = styled.p`
+  display: inline;
+  font-size: 20px;
+  color: blue;
+`;
+
 export const Rating = styled.span`
-  margin-right: auto;
-  margin-bottom: 14px;
-  padding: 20px;
-  display: block;
+  display: inline;
+  margin-left: 14px;
   font-size: 32px;
   font-weight: 700;
   color: orange;
 `;
 export const H2 = styled.h2`
+  margin-top: 14px;
   font-size: 20px;
   color: blue;
 `;

@@ -8,6 +8,7 @@ import {
   InfoWrapper,
   P,
   Rating,
+  RatingP,
   StyledLink,
   StyledLinkList,
   Ul,
@@ -48,10 +49,15 @@ const MovieDetails = () => {
           <img width={300} height={450} src={movieImg} alt="poster" />
           <InfoWrapper>
             <H1>{movie.title || movie.name}</H1>
-            <Rating>{movie.vote_average}</Rating>
+            <div>
+              <RatingP>Rating:</RatingP>
+              <Rating>{movie.vote_average}</Rating>
+            </div>
             <H2>Overwiew</H2>
+
             <P>{movie.overview}</P>
             <H2>Genres</H2>
+
             <P>
               {movie.genres && movie.genres.map(genre => genre.name).join(', ')}
             </P>
