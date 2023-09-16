@@ -31,7 +31,6 @@ const MovieDetails = () => {
     async function getSomMovie() {
       try {
         const movieData = await getMovieById(movieId);
-        console.log(movieData);
         setMovie(movieData);
       } catch (error) {
         setHasMovie(false);
