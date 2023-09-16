@@ -3,6 +3,13 @@ import { FilmList } from 'components/FilmList/FilmList';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
+import {
+  FormInput,
+  MovieWrapper,
+  SearchForm,
+  SearchFormButton,
+} from './Movies.styled';
+import { BsSearch } from 'react-icons/bs';
 
 const Movies = () => {
   const [searchVel, setSearchVel] = useState('');
@@ -40,8 +47,8 @@ const Movies = () => {
   };
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <input
+      <SearchForm onSubmit={onSubmit}>
+        <FormInput
           onChange={onInput}
           type="text"
           name="search"
@@ -50,9 +57,15 @@ const Movies = () => {
           autoFocus
           placeholder="Search movies"
         />
-        <button type="submit">Search movie</button>
-      </form>
-      {moviesList.length > 0 && <FilmList movies={moviesList} />}
+        <SearchFormButton type="submit">
+          <BsSearch size={36} />
+        </SearchFormButton>
+      </SearchForm>
+      {moviesList.length > 0 && (
+        <MovieWrapper>
+          <FilmList movies={moviesList} />
+        </MovieWrapper>
+      )}
     </>
   );
 };

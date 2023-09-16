@@ -1,12 +1,18 @@
 import { getMovieById } from 'components/Api';
 import { Suspense, useEffect, useState } from 'react';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+  FilmWrapper,
+  H1,
+  H2,
+  InfoWrapper,
+  P,
+  Rating,
+  StyledLink,
+  StyledLinkList,
+  Ul,
+  Warning,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -25,6 +31,7 @@ const MovieDetails = () => {
     async function getSomMovie() {
       try {
         const movieData = await getMovieById(movieId);
+        console.log(movieData);
         setMovie(movieData);
       } catch (error) {
         setHasMovie(false);
@@ -36,31 +43,39 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Link to={location?.state?.from ?? '/'}>Go back</Link>
+      <StyledLink to={location?.state?.from ?? '/'}>Go back</StyledLink>
       {movie && (
-        <div>
+        <FilmWrapper>
           <img width={300} height={450} src={movieImg} alt="poster" />
-          <h1>{movie.title || movie.name}</h1>
-          <span>{movie.vote_average}</span>
-          <h2>Overwiew</h2>
-          <p>{movie.overview}</p>
-          <h2>Genres</h2>
-          <p>
-            {movie.genres && movie.genres.map(genre => genre.name).join(' ')}
-          </p>
-        </div>
+          <InfoWrapper>
+            <H1>{movie.title || movie.name}</H1>
+            <Rating>{movie.vote_average}</Rating>
+            <H2>Overwiew</H2>
+            <P>{movie.overview}</P>
+            <H2>Genres</H2>
+            <P>
+              {movie.genres && movie.genres.map(genre => genre.name).join(', ')}
+            </P>
+          </InfoWrapper>
+        </FilmWrapper>
       )}
       {movie && (
-        <ul>
+        <Ul>
           <li>
-            <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+            <StyledLinkList to={`/movies/${movieId}/cast`}>Cast</StyledLinkList>
           </li>
           <li>
-            <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+            <StyledLinkList to={`/movies/${movieId}/reviews`}>
+              Reviews
+            </StyledLinkList>
           </li>
-        </ul>
+        </Ul>
       )}
-      {!hasMovie && <div>Wow, something happened, try another movie!</div>}
+      {!hasMovie && (
+        <Warning>
+          Wow, something happened, press 'Go back' and try another movie!
+        </Warning>
+      )}
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

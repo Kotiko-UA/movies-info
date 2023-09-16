@@ -1,6 +1,7 @@
 import { getMovieReviews } from 'components/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Author, Name, Text, Ul } from './Reviews.stuled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -26,15 +27,16 @@ const Reviews = () => {
   return (
     <div>
       {!hasReview && <div>movie don`t have any reviews</div>}
-      <ul>
+      <Ul>
         {reviews.length > 0 &&
           reviews.map(author => (
             <li key={author.id}>
-              <h2>Author: {author.author}</h2>
-              <p>{author.content}</p>
+              <Author>Author: </Author>
+              <Name>{author.author}</Name>
+              <Text>{author.content}</Text>
             </li>
           ))}
-      </ul>
+      </Ul>
     </div>
   );
 };
