@@ -16,3 +16,8 @@ export const Text = styled.p`
   font-size: 14px;
   color: #0089ff;
 `;
+export const HasReview = styled.div`
+  padding: 4px 15px;
+  font-size: 20px;
+  color: blue;
+`;

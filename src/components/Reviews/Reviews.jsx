@@ -1,7 +1,7 @@
 import { getMovieReviews } from 'components/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Author, Name, Text, Ul } from './Reviews.stuled';
+import { Author, HasReview, Name, Text, Ul } from './Reviews.stuled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -26,7 +26,7 @@ const Reviews = () => {
   }, [movieId]);
   return (
     <div>
-      {!hasReview && <div>movie don`t have any reviews</div>}
+      {!hasReview && <HasReview>movie don`t have any reviews :(</HasReview>}
       <Ul>
         {reviews.length > 0 &&
           reviews.map(author => (
