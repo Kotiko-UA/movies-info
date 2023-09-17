@@ -20,6 +20,13 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [hasMovie, setHasMovie] = useState(true);
   const location = useLocation();
+
+  const [searchQuery] = useState(
+    location?.state?.movieQuery
+      ? `/movies?query=${location.state.movieQuery}`
+      : null
+  );
+
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
   const movieImg = movie?.poster_path
@@ -29,7 +36,7 @@ const MovieDetails = () => {
   useEffect(() => {
     if (!movieId) return;
 
-    async function getSomMovie() {
+    async function getSomeMovie() {
       try {
         const movieData = await getMovieById(movieId);
         setMovie(movieData);
@@ -38,12 +45,14 @@ const MovieDetails = () => {
       }
     }
 
-    getSomMovie();
+    getSomeMovie();
   }, [movieId]);
 
   return (
     <>
-      <StyledLink to={location?.state?.from ?? '/'}>Go back</StyledLink>
+      <StyledLink to={searchQuery || location?.state?.from || '/'}>
+        Go back
+      </StyledLink>
       {movie && (
         <FilmWrapper>
           <img width={300} height={450} src={movieImg} alt="poster" />

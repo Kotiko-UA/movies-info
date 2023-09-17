@@ -15,13 +15,13 @@ const Movies = () => {
   const [searchVel, setSearchVel] = useState('');
   const [moviesList, setMoviesList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const movies = searchParams.get('query') ?? '';
+  const movieQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
-    if (movies === '') return;
+    if (movieQuery === '') return;
     async function getSearch() {
       try {
-        const searcMovies = await getMovieByName(movies);
+        const searcMovies = await getMovieByName(movieQuery);
         if (searcMovies.results.length === 0) {
           toast.error('we don`t found any movies');
           return;
@@ -33,7 +33,7 @@ const Movies = () => {
     }
 
     getSearch();
-  }, [movies]);
+  }, [movieQuery]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -63,7 +63,7 @@ const Movies = () => {
       </SearchForm>
       {moviesList.length > 0 && (
         <MovieWrapper>
-          <FilmList movies={moviesList} />
+          <FilmList movies={moviesList} movieQuery={movieQuery} />
         </MovieWrapper>
       )}
     </>

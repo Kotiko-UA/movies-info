@@ -1,6 +1,6 @@
 import { Li, StyledMovesLink, Ul } from 'Pages/Home/Home.styled';
 import { useLocation } from 'react-router-dom';
-export const FilmList = ({ movies }) => {
+export const FilmList = ({ movies, movieQuery }) => {
   const location = useLocation();
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
@@ -12,7 +12,7 @@ export const FilmList = ({ movies }) => {
           <Li key={movie.id}>
             <StyledMovesLink
               to={`/movies/${movie.id}`}
-              state={{ from: location }}
+              state={{ from: location, movieQuery }}
             >
               <img
                 width={300}
