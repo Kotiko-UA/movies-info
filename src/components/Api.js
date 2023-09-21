@@ -13,12 +13,12 @@ export const getMovieById = async id => {
   const resp = await axios.get(`movie/${id}`);
   return resp.data;
 };
-export const getMovieCredits = async id => {
-  const resp = await axios.get(`movie/${id}/credits`);
+export const getMovieCredits = async (id, signal) => {
+  const resp = await axios.get(`movie/${id}/credits`, { signal });
   return resp.data;
 };
-export const getMovieReviews = async id => {
-  const resp = await axios.get(`movie/${id}/reviews`);
+export const getMovieReviews = async (id, signal) => {
+  const resp = await axios.get(`movie/${id}/reviews`, { signal });
   return resp.data;
 };
 export const getMovieByName = async (name, signal) => {

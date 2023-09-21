@@ -9,10 +9,11 @@ const Reviews = () => {
   const [hasReview, setHasReview] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
     async function getReviews() {
       try {
         if (!movieId) return;
-        const revData = await getMovieReviews(movieId);
+        const revData = await getMovieReviews(movieId, controller.signal);
         if (revData.results.length === 0) {
           setHasReview(false);
           return;
@@ -23,6 +24,7 @@ const Reviews = () => {
       }
     }
     getReviews();
+    return () => controller.abort();
   }, [movieId]);
   return (
     <div>

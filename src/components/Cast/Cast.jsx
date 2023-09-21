@@ -10,15 +10,17 @@ const Cast = () => {
   const { movieId } = useParams();
   useEffect(() => {
     if (!movieId) return;
+    const controller = new AbortController();
     async function getCast() {
       try {
-        const getDataCast = await getMovieCredits(movieId);
+        const getDataCast = await getMovieCredits(movieId, controller.signal);
         setCast(getDataCast.cast);
       } catch (error) {
         console.log(error);
       }
     }
     getCast();
+    return () => controller.abort();
   }, [movieId]);
 
   return (
