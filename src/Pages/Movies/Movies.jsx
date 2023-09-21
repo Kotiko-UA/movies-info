@@ -18,10 +18,11 @@ const Movies = () => {
   const movieQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
+    const controller = new AbortController();
     if (movieQuery === '') return;
     async function getSearch() {
       try {
-        const searcMovies = await getMovieByName(movieQuery);
+        const searcMovies = await getMovieByName(movieQuery, controller.signal);
         if (searcMovies.results.length === 0) {
           toast.error('we don`t found any movies');
           return;
@@ -33,6 +34,8 @@ const Movies = () => {
     }
 
     getSearch();
+
+    return () => controller.abort();
   }, [movieQuery]);
 
   const onSubmit = e => {

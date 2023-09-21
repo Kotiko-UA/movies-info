@@ -5,8 +5,8 @@ const AUTH_TOKEN =
 axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // const API_KEY =
 //   'eyJhbGciOiJIUzI1NiJ9.3eccdf8823f411b1fe7c83d5aaab5ec2.-1bOyX5jplIjl0Aftwpu8qNZo3aCSMsHeVRvJDduVjA';
-export const getTrandingMovies = async () => {
-  const resp = await axios.get(`trending/all/day`);
+export const getTrandingMovies = async signal => {
+  const resp = await axios.get(`trending/all/day`, { signal });
   return resp.data;
 };
 export const getMovieById = async id => {
@@ -21,7 +21,7 @@ export const getMovieReviews = async id => {
   const resp = await axios.get(`movie/${id}/reviews`);
   return resp.data;
 };
-export const getMovieByName = async name => {
-  const resp = await axios.get(`search/movie?query=${name}`);
+export const getMovieByName = async (name, signal) => {
+  const resp = await axios.get(`search/movie?query=${name}`, { signal });
   return resp.data;
 };
